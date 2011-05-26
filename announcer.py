@@ -54,11 +54,10 @@ for line in l2:
 	if a is not None:
 		out.append(a.group(1) + "\n")
 
-msg = MIMEText("".join(out))
+msg = MIMEText("".join(out), _charset="utf-8")
 msg['Subject'] = "Týdenní přehled událostí"
 msg['From'] = "noreply@brmlab.cz"
 msg['To'] = dest_addr
-msg._charset = "utf-8"
 
 if out.__len__() > 0:
 	s = smtplib.SMTP(smtp_server)
