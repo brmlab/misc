@@ -34,25 +34,25 @@ for line in l2:
 	# event page s popiskem
 	a = re.match(r"  \* (.*) \[\[event:(.*)\|(.*)\]\]", line)
 	if a is not None:
-		out.append(a.group(1) + " " + a.group(3) + " - " + " http://brmlab.cz/event/" + a.group(2))
+		out.append(a.group(1) + " " + a.group(3) + " - " + " http://brmlab.cz/event/" + a.group(2) + "\n")
 		continue
 
 	# event page bez popisku
 	a = re.match(r"  \* (.*) \[\[event:(.*)\]\]", line)
 	if a is not None:
-		out.append(a.group(1) + " " + "http://brmlab.cz/event/" + a.group(2))
+		out.append(a.group(1) + " " + "http://brmlab.cz/event/" + a.group(2) + "\n")
 		continue
 
 	# link s popiskem
 	a = re.match(r"  \* (.*) \[\[(?<!event)(.*)\|(.*)\]\]", line)
 	if a is not None:
-		out.append(a.group(1) + " " + a.group(3) + " - " + a.group(2))
+		out.append(a.group(1) + " " + a.group(3) + " - " + a.group(2) + "\n")
 		continue
 
 	# ostatni
 	a = re.match(r"  \* (.*)", line)
 	if a is not None:
-		out.append(a.group(1))
+		out.append(a.group(1) + "\n")
 
 msg = MIMEText("".join(out))
 msg['Subject'] = "Týdenní přehled událostí"
