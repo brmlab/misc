@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 
 url = "http://brmlab.cz/_export/raw/event/start"
 smtp_server = "localhost"
-dest_addr = "announcer-test@kerestes.cz"
+dest_addr = "announce@brmlab.cz, brmlab@brmlab.cz"
 
 src = urllib2.urlopen(url)
 now = datetime.datetime.now()
