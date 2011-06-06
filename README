@@ -1,0 +1,8 @@
+Various utilities
+
+annoncer.py
+- send email once a week informing about upcoming events
+
+barcodes.py
+- generates CODE-128 barcodes using zint
+
