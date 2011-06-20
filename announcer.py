@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 
 url = "http://brmlab.cz/_export/raw/event/start"
 smtp_server = "localhost"
-dest_addr = ("announce@brmlab.cz", "brmlab@brmlab.cz")
+dest = ("announce@brmlab.cz", "brmlab@brmlab.cz")
 
 src = urllib2.urlopen(url)
 now = datetime.datetime.now()
@@ -63,4 +63,5 @@ if len(out):
 	msg['From'] = "noreply@brmlab.cz"
 	msg['To'] = dest_addr
 	s = smtplib.SMTP(smtp_server)
-	s.sendmail("noreply@brmlab.cz", dest_addr, msg.as_string())
+	for addr in dest:
+		s.sendmail("noreply@brmlab.cz", addr, msg.as_string())
