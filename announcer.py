@@ -61,7 +61,7 @@ if len(out):
 	msg = MIMEText("\n".join(out), _charset="utf-8")
 	msg['Subject'] = "Tydenni prehled udalosti / Weekly overview of events"
 	msg['From'] = "noreply@brmlab.cz"
-	msg['To'] = dest_addr
 	s = smtplib.SMTP(smtp_server)
 	for addr in dest:
+		msg['To'] = addr
 		s.sendmail("noreply@brmlab.cz", addr, msg.as_string())
