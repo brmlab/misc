@@ -6,3 +6,5 @@ annoncer.py
 barcodes.py
 - generates CODE-128 barcodes using zint
 
+Makefile.tpl
+- universal makefile template
