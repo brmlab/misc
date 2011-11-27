@@ -27,7 +27,7 @@ for line in lines:
 	a = re.match(r"  \* (.*?) (.*)", line)
 	if a is not None:
 		diff = datetime.datetime.strptime(a.group(1),"%d.%m.%Y") - now
-		if diff < datetime.timedelta(weeks=1) and diff >= datetime.timedelta(days=0):
+		if diff < datetime.timedelta(weeks=1) and diff >= datetime.timedelta(days=-1):
 			weeklines.append(line)
 
 for line in weeklines:
