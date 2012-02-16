@@ -3,17 +3,18 @@ CC=gcc
 CXX=g++
 CFLAGS=$(shell pkg-config --cflags @EDITME@) -Wall
 CXXFLAGS=$(CFLAGS)
-LDFLAGS=$(shell pkg-config --libs @EDITME@)
+LDFLAGS=
+LIBS=$(shell pkg-config --libs @EDITME@)
 OBJ=$(NAME).o
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+	$(CC) $(LDFLAGS) $(LIBS) $(OBJ) -o $(NAME)
 
 %.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.cpp
-	$(CXX) -c $< -o $@ $(CXXFLAGS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(NAME) $(OBJ)
