@@ -43,7 +43,7 @@ try:
 	    data = raw_input()
 	    elem = Popen(('zint','--directsvg','-d', data), stdout = PIPE).communicate()[0].split('\n')
 	    elem = elem[8:-2]
-	    elem[0] = elem[0].replace('id="barcode"', 'transform="matrix(%f,0,0,%f,%f,%f)"' % (scalex, scaley, 42+i*150 , 14+j*74.3) )
+	    elem[0] = elem[0].replace('id="barcode"', 'transform="matrix(%f,0,0,%f,%f,%f)"' % (scalex, scaley, 22+i*150 , 14+j*74.3) )
 	    if args.brmlabel:
 		elem[23] = 'brm - ' + elem[23].strip() + ' - lab'
 	    f.write('\n'.join(elem))
