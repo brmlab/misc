@@ -1,5 +1,10 @@
 #!/usr/bin/python
 #
+# accept strings on stdin and put them to a SVG in grid layout
+# compatible with our sticker papers
+#
+# example: seq -f %06g 0 1000 | ./barcodes.py
+#
 # requires zint binary from zint package
 #
 
@@ -14,10 +19,6 @@ svgfoot = """
 </svg>
 """
 
-if len(sys.argv) > 1:
-    start = int(sys.argv[1])
-else:
-    start = 0
 cntx = 7
 cnty = 10
 scalex = 1
@@ -26,13 +27,17 @@ scaley = 0.8
 f = open('barcodes.svg','w')
 f.write(svghead)
 
-for i in range(cntx):
-    for j in range(cnty):
-        elem = Popen(('zint','--directsvg','-d','%06d' % (start+i*cnty+j) ), stdout = PIPE).communicate()[0].split('\n')
-        elem = elem[8:-2]
-        elem[0] = elem[0].replace('id="barcode"', 'transform="matrix(%f,0,0,%f,%f,%f)"' % (scalex, scaley, 42+i*150 , 14+j*74.3) )
-        elem[23] = 'brm - ' + elem[23].strip() + ' - lab'
-        f.write('\n'.join(elem))
+try:
+    for i in range(cntx):
+	for j in range(cnty):
+	    data = raw_input()
+	    elem = Popen(('zint','--directsvg','-d', data), stdout = PIPE).communicate()[0].split('\n')
+	    elem = elem[8:-2]
+	    elem[0] = elem[0].replace('id="barcode"', 'transform="matrix(%f,0,0,%f,%f,%f)"' % (scalex, scaley, 42+i*150 , 14+j*74.3) )
+	    elem[23] = 'brm - ' + elem[23].strip() + ' - lab'
+	    f.write('\n'.join(elem))
+except EOFError:
+    pass
 
 f.write(svgfoot)
 f.close()
